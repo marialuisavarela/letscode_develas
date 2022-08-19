@@ -1,0 +1,73 @@
+/*
+ * Aula 3 - Criação de databases e tabelas
+ */
+
+/*************MANIPULANDO DADOS*************/
+
+--Criar uma nova base de dados, e criar uma nova conexão com essa base.
+create database turma;
+
+-- Realizar uma alteração no nome da base de dados criada anteriormente.
+alter database turma rename to turma847;
+
+-- Criar um novo usuário e alterar do owne da base de dados.
+CREATE ROLE aluno NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'aluno';
+drop role usuario_aluno; --tinha criado antes e deletei (dá erro se ele for owner)
+ALTER DATABASE turma847 OWNER to aluno;
+
+-- Deletar uma base de dados.
+drop database turma847;
+
+-- Deletar uma base de dados com o comando if exists
+drop database if exists turma847;
+
+/*************MANIPULANDO TABELAS*************/
+
+-- Criar uma tabela
+create table alunos (
+	matricula		integer,
+	nome			varchar(50),
+	idade			integer,
+	data_matricula	date
+)
+
+-- Criar uma tabela e definir chave primária e estrangeira.
+create table uf (
+	cod_uf		integer,
+	nome_uf		varchar(2),
+	primary key (cod_uf)
+)
+
+create table cidade (
+	cod_cidade 	integer,
+	nome_cidade	varchar(50),
+	cod_uf		integer,
+	primary key (cod_cidade),
+	foreign key (cod_uf) references uf (cod_uf)
+)
+
+-- Criar uma tabela e definir valores default.
+create table clientes (
+	cod_cliente		integer,
+	nome_cliente	varchar(60),
+	idade_cliente	integer default -1
+)
+
+-- Alterar o nome da tabela criada anteriormente
+alter table clientes rename to cliente;
+alter table cliente rename to clientes;
+
+-- Alterar o nome de uma coluna da tabela.
+alter table clientes rename column cod_cliente to id_cliente;
+
+-- Alterar o tipo de dado de uma coluna da tabela.
+alter table clientes alter column id_cliente type varchar(3);
+
+-- Adicionar uma coluna na tabela.
+alter table clientes add column cpf varchar(11)
+
+-- Deletar uma coluna na tabela.
+alter table clientes drop column cpf
+
+-- Deletar a tabela
+drop table if exists clientes;
