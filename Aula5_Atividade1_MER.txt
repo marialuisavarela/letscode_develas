@@ -1,0 +1,17 @@
+Entidades:
+	clientes
+	pedidos
+	produtos
+	vendas
+
+Atributos:
+	clientes (nome_cliente, telefone, email)
+	pedidos (num_pedido, qtd_produto,valor_total)
+	produtos (nome_produto, descricao, marca, preco, qtd_estoque)
+	venda (num_venda, desconto, valor_final, forma pgto)
+
+Relacionamentos:
+	clientes FAZEM pedidos
+	pedidos TEM produtos
+	clientes CONCLUEM vendas
+	vendas CONTÉM pedidos
